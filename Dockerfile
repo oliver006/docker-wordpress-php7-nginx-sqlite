@@ -1,5 +1,4 @@
-#FROM phusion/baseimage:0.9.18 
-FROM ubuntu:14.04
+FROM phusion/baseimage:0.9.18
 MAINTAINER Oliver <oliver@21zoo.com>
 
 CMD ["/sbin/my_init"]
@@ -58,7 +57,6 @@ RUN cd /tmp/ && mv sqlite-integration /usr/share/nginx/www/wp-content/plugins/ &
 
 RUN chown -R www-data:www-data /usr/share/nginx/www
 
-
 # Wordpress Initialization and Startup Script
 ADD ./start.sh /start.sh
 RUN chmod 755 /start.sh
@@ -67,7 +65,7 @@ RUN chmod 755 /start.sh
 EXPOSE 80
 
 # volume for sqlite and wordpress install
-VOLUME ["/var/lib/sqlite", "/usr/share/nginx/www"]
+VOLUME ["/usr/share/nginx/www/wp-content/database/", "/usr/share/nginx/www"]
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
